@@ -36,6 +36,10 @@ const PORT = process.env.PORT || 5001
 connectDB()
 
 //All API Routes
+app.use('/',(req,res) => {
+  res.status(200).json({message:"Hi hello"})
+  
+})
 app.use(apiRoutes)
 app.all('*', (req, res) => {
   res.status(404).json({ message: `${req.originalUrl} is not found on this server` })
