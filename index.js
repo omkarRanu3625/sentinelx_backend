@@ -6,7 +6,8 @@ const rateLimit = require('express-rate-limit')
 
 const { connectDB } = require('./config/configDB')
 const logger = require('./utils/main/logger')
-const apiRoutes = require('./routes/api')
+const authRoutes = require('./routes/auth')
+const usersRoutes = require('./routes/user')
 
 const app = express()
 const limiter = rateLimit({
@@ -36,11 +37,12 @@ const PORT = process.env.PORT || 5001
 connectDB()
 
 //All API Routes
-app.use(apiRoutes)
+app.use('/api/auth',authRoutes )
+app.use('/api/users',usersRoutes)
 app.all('*', (req, res) => {
   res.status(404).json({ message: `${req.originalUrl} is not found on this server` })
 })
 
 app.listen(PORT, () => {
-  console.log(`Server running on port http://localhost:${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
