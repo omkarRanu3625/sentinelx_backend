@@ -37,7 +37,7 @@ const PORT = process.env.PORT || 5001
 connectDB()
 
 //All API Routes
-app.use('/',(req,res) =>{
+app.get('/',(req,res) =>{
   res.status(200).json({Messgae:"hi hello"})
 })
 app.use('/api/auth',authRoutes )
